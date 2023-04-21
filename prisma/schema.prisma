@@ -11,20 +11,23 @@ datasource db {
 }
 
 model User {
-  id     Int   @id @default(autoincrement())
-  email  String   @unique
-  name   String?
-  city   String?
-  age    Int?
-  avatar String?
-  status Boolean? @default(false)
-  pets   Pets[]
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  name     String?
+  city     String?
+  age      Int?
+  avatar   String?
+  password String?
+  status   Boolean? @default(false)
+  pets     Pets[]
 }
 
 model Pets {
   id      Int      @id @default(autoincrement())
   name    String
   type    String?
+  image   String?
+  logo    String?
   status  Boolean? @default(false)
   owner   User?    @relation(fields: [ownerId], references: [id])
   ownerId Int?

@@ -16,6 +16,7 @@ export class UsersService {
         status: userData.status,
         age: userData.age,
         email: userData.email,
+        avatar: userData.avatar,
       },
     });
   }
@@ -25,23 +26,42 @@ export class UsersService {
       orderBy: {
         name: 'asc',
       },
-      take: 5,
+      take: 100,
     });
   }
 
   async getUserById(userId: string) {
     return this.prismaService.user.findFirst({
       where: { id: Number(userId) },
-      // select: {
-      //   name: true,
-      //   city: true,
-      //   age: true,
-      // },
-      include: {
-        pets: true,
+      select: {
+        id: true,
+        name: true,
+        city: true,
+        age: true,
       },
+      // include: {
+      //   pets: true,
+      // },
     });
   }
 
-  async deleteUser(userId: string) {}
+  async deleteUser(id: string) {
+    // const user = this.users.find((item) => item.id === id);
+    // //slice на вибір
+    // return this.users;
+  }
+
+  async findByUsername(userEmail: string) {
+    return this.prismaService.user.findFirst({
+      where: { email: userEmail },
+    });
+  }
+
+  async findByUsername(userEmail: string) {
+    return this.prismaService.user.findFirst({
+      where: {
+        email: { userEmail },
+      },
+    });
+  }
 }
