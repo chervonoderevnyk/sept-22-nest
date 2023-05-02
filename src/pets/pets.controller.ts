@@ -3,6 +3,7 @@ import {
   Controller,
   HttpStatus,
   Patch,
+  Post,
   Req,
   Res,
   UploadedFiles,
@@ -10,14 +11,14 @@ import {
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { editFileName, imageFileFilter } from '../core/file-upload/file-upload';
+import { editFileName, imageFileFilter } from '../core/file-upload/file.upload';
+import { CreateUserDto } from '../users/dto/users.dto';
 import { PetDto } from './dto/pet.dto';
 import { PetsService } from './pets.service';
 
 @Controller('pets')
 export class PetsController {
   constructor(private readonly petsService: PetsService) {}
-
   @Patch()
   @UseInterceptors(
     FileFieldsInterceptor(
